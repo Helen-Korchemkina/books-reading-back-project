@@ -1,7 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-require('dotenv').config();
+require("dotenv").config();
 
 // const роут = require('./routes/шлях');
 
@@ -12,7 +12,7 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 // app.use('/api/***', назва роута);
 
@@ -26,3 +26,6 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
+
+
+
