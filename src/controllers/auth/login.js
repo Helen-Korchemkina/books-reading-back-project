@@ -7,7 +7,7 @@ const { SECRET_KEY } = process.env;
 
 const login = async (req, res, next) => {
     try {
-        const { error } = schemas.loginSchema.validate(req.body);
+        const { error } = schemas.joiLoginSchema.validate(req.body);
 
         if (error) {
             throw RequestError(400, error.message);
