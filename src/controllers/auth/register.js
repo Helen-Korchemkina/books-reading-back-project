@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 const register = async (req, res, next) => {
     try {
-        const { error } = schemas.registerSchema.validate(req.body);
+        const { error } = schemas.joiRegisterSchema.validate(req.body);
 
         if (error) {
             throw RequestError(400, error.message);
