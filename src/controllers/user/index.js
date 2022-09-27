@@ -1,5 +1,9 @@
-const currentUser = require('./currentUser');
+const addTraining = require("./addTraining");
+const currentTraining = require("./currentTraining");
+const currentUser = require("./currentUser");
 
 module.exports = {
-  currentUser,
+    currentUser,
+    addTraining,
+    currentTraining,
 };
