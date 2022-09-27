@@ -1,6 +1,6 @@
-const { Statistics } = require("../../models");
+const { Statistics } = require('../../models');
 
-const addStatistics = async (bookId) => {
+const addStatistics = async bookId => {
   return await Statistics.create({ owner: bookId });
 };
 

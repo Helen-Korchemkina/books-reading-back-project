@@ -4,34 +4,37 @@ const { handleSchemaValidationError } = require('../helpers');
 
 const emailRegexp = /^[\w.]+@[\w.]+.[\w.]+$/;
 
-const userSchema = new Schema({
-  name: {
-    type: String,
-    required: [true, 'Name is required'],
+const userSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Name is required'],
+    },
+    email: {
+      type: String,
+      required: [true, 'Email is required'],
+      match: emailRegexp,
+      unique: true,
+    },
+    password: {
+      type: String,
+      default: '',
+    },
+    token: {
+      type: String,
+      default: '',
+    },
+    startTraining: {
+      type: String,
+      default: '',
+    },
+    finishTraining: {
+      type: String,
+      default: '',
+    },
   },
-  email: {
-    type: String,
-    required: [true, 'Email is required'],
-    match: emailRegexp,
-    unique: true,
-  },
-  password: {
-    type: String,
-    default: '',
-  },
-  token: {
-    type: String,
-    default: '',
-  },
-  startTraining: {
-    type: String,
-    default: '',
-  },
-  finishTraining: {
-    type: String,
-    default: '',
-  }
-}, { versionKey: false, timestamps: true });
+  { versionKey: false, timestamps: true }
+);
 
 userSchema.post('save', handleSchemaValidationError);
 
@@ -48,8 +51,8 @@ const joiLoginSchema = Joi.object({
 });
 
 const schemas = {
-    joiRegisterSchema,
-    joiLoginSchema,
+  joiRegisterSchema,
+  joiLoginSchema,
 };
 
 const User = model('user', userSchema);
