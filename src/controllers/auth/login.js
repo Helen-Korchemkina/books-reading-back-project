@@ -1,5 +1,6 @@
 const { RequestError } = require('../../helpers');
 const { User, schemas } = require('../../models/user');
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
