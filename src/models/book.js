@@ -1,16 +1,16 @@
-const { Schema, model } = require("mongoose");
-const Joi = require("joi");
-const { handleSchemaValidationError } = require("../helpers");
+const { Schema, model } = require('mongoose');
+const Joi = require('joi');
+const { handleSchemaValidationError } = require('../helpers');
 
 const bookSchema = Schema(
   {
     title: {
       type: String,
-      requiered: [true, "book title is required"],
+      requiered: [true, 'book title is required'],
     },
     author: {
       type: String,
-      requiered: [true, "author title is required"],
+      requiered: [true, 'author title is required'],
     },
     releaseDate: {
       type: String,
@@ -22,14 +22,14 @@ const bookSchema = Schema(
     },
     owner: {
       type: Schema.Types.ObjectId,
-      ref: "user",
+      ref: 'user',
       required: true,
     },
     status: {
       type: String,
       requiered: true,
-      enum: ["Going to read", "Already read", "Reading now"],
-      default: "Going to read",
+      enum: ['Going to read', 'Already read', 'Reading now'],
+      default: 'Going to read',
     },
     rating: {
       type: Number,
@@ -40,12 +40,13 @@ const bookSchema = Schema(
     resume: {
       type: String,
       requiered: false,
+      default: null,
     },
   },
   { versionKey: false, timestamps: true }
 );
 
-bookSchema.post("save", handleSchemaValidationError);
+bookSchema.post('save', handleSchemaValidationError);
 
 const addSchema = Joi.object({
   title: Joi.string().required(),
@@ -64,7 +65,7 @@ const bookJoiSchemas = {
   reviewSchema,
 };
 
-const Book = model("book", bookSchema);
+const Book = model('book', bookSchema);
 
 module.exports = {
   Book,

@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose");
-const Joi = require("joi");
-const { handleSchemaValidationError } = require("../helpers");
+const { Schema, model } = require('mongoose');
+const Joi = require('joi');
+const { handleSchemaValidationError } = require('../helpers');
 
 const statisticsSchema = new Schema(
   {
@@ -21,14 +21,14 @@ const statisticsSchema = new Schema(
     },
     owner: {
       type: Schema.Types.ObjectId,
-      ref: "book",
+      ref: 'book',
       required: true,
     },
   },
   { versionKey: false, timestamps: true }
 );
 
-statisticsSchema.post("save", handleSchemaValidationError);
+statisticsSchema.post('save', handleSchemaValidationError);
 
 const addStatistics = Joi.object({
   readDate: Joi.string().required(),
@@ -40,7 +40,7 @@ const statisticsJoiSchema = {
   addStatistics,
 };
 
-const Statistics = model("statistics", statisticsSchema);
+const Statistics = model('statistics', statisticsSchema);
 
 module.exports = {
   Statistics,

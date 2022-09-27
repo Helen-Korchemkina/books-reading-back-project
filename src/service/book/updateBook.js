@@ -1,4 +1,4 @@
-const { Book } = require("../../models");
+const { Book } = require('../../models');
 
 const updateBook = async (bookId, body) => {
   return await Book.findByIdAndUpdate({ _id: bookId }, body, {
