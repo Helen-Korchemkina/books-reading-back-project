@@ -13,7 +13,7 @@ routerBook.get('/', controllerWrapper(bookControllers.getAllBooks));
 routerBook.post(
   '/',
   validationBody(bookJoiSchemas.addSchema),
-  controllerWrapper(bookControllers.add)
+  controllerWrapper(bookControllers.addBook)
 );
 
 routerBook.patch(
@@ -32,6 +32,12 @@ routerBook.patch(
   '/:bookId/statistics',
   validationBody(statisticsJoiSchema.addStatistics),
   controllerWrapper(bookControllers.updateStatistics)
+);
+
+routerBook.patch(
+  '/:bookId/status',
+  validationBody(bookJoiSchemas.updateStatus),
+  controllerWrapper(bookControllers.updateBook)
 );
 
 routerBook.delete('/:bookId', controllerWrapper(bookControllers.deleteBook));

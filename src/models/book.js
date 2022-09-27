@@ -60,9 +60,14 @@ const reviewSchema = Joi.object({
   resume: Joi.string(),
 });
 
+const updateStatus = Joi.object({
+  status: Joi.string().required(),
+});
+
 const bookJoiSchemas = {
   addSchema,
   reviewSchema,
+  updateStatus,
 };
 
 const Book = model('book', bookSchema);
