@@ -1,6 +1,6 @@
 const { RequestError } = require("../../helpers");
 const { User, schemas } = require("../../models/user");
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 const register = async (req, res, next) => {
     try {

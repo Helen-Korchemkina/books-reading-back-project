@@ -4,8 +4,9 @@ const cors = require("cors");
 require("dotenv").config();
 
 // const роут = require('./routes/шлях');
-const authRouter = require('./src/routes/api/auth');
-const userRouter = require('./src/routes/api/user');
+const authRouter = require("./src/routes/api/auth");
+const userRouter = require("./src/routes/api/user");
+const bookRouter = require("./src/routes/api/book");
 
 const app = express();
 
@@ -17,8 +18,9 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // app.use('/api/***', назва роута);
-app.use('/api/auth', authRouter);
-app.use('/api/users', userRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);
+app.use("/api/book", bookRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
@@ -26,10 +28,7 @@ app.use((req, res) => {
 
 app.use((err, req, res, next) => {
   const { status = 500, message = "Server error" } = err;
-  res.status(status).json(message);
+  res.status(status).json({ message });
 });
 
 module.exports = app;
-
-
-
