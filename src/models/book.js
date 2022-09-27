@@ -1,34 +1,35 @@
-const { Schema, model } = require("mongoose");
-const Joi = require("joi");
+const { Schema, model } = require('mongoose');
+const Joi = require('joi');
+const { handleSchemaValidationError } = require('../helpers');
 
 const bookSchema = Schema(
   {
     title: {
       type: String,
-      requiered: [true, "book title is required"],
+      requiered: [true, 'book title is required'],
     },
     author: {
       type: String,
-      requiered: [true, "author title is required"],
+      requiered: [true, 'author title is required'],
     },
-    date: {
+    releaseDate: {
       type: String,
       require: true,
     },
-    pages: {
-      type: String,
+    countOfPages: {
+      type: Number,
       require: true,
     },
     owner: {
       type: Schema.Types.ObjectId,
-      ref: "user",
+      ref: 'user',
       required: true,
     },
     status: {
       type: String,
       requiered: true,
-      enum: ["Going to read", "Already read", "Reading now"],
-      default: "Going to read",
+      enum: ['Going to read', 'Already read', 'Reading now'],
+      default: 'Going to read',
     },
     rating: {
       type: Number,
@@ -39,24 +40,34 @@ const bookSchema = Schema(
     resume: {
       type: String,
       requiered: false,
+      default: null,
     },
   },
   { versionKey: false, timestamps: true }
 );
 
-const joiBookSchema = Joi.object({
+bookSchema.post('save', handleSchemaValidationError);
+
+const addSchema = Joi.object({
   title: Joi.string().required(),
   author: Joi.string().required(),
-  date: Joi.string().required(),
-  pages: Joi.string().required(),
-  status: Joi.string().required(),
+  releaseDate: Joi.string().required(),
+  countOfPages: Joi.number().required(),
+});
+
+const reviewSchema = Joi.object({
   rating: Joi.number().required(),
   resume: Joi.string(),
 });
 
-const Book = model("book", bookSchema);
+const bookJoiSchemas = {
+  addSchema,
+  reviewSchema,
+};
+
+const Book = model('book', bookSchema);
 
 module.exports = {
   Book,
-  joiBookSchema,
+  bookJoiSchemas,
 };

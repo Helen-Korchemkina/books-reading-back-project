@@ -1,19 +1,9 @@
-const { RequestError } = require("../../helpers");
-const { User } = require("../../models/user");
+const currentUser = async (req, res) => {
+  const { _id, name, email, startTraining, finishTraining, createdAt, training } =
+    req.user;
+  const user = { _id, name, email, startTraining, finishTraining, createdAt, training };
 
-const currentUser = async (req, res, next) => {
-    try {
-        const { token } = req.user;
-        const user = await User.findOne({ token }, '-password -token');
-
-        if (!user) {
-            throw RequestError(404, 'Not found');
-        };
-
-        res.json({ user });
-    } catch (error) {
-        next(error);
-    }
+  res.json({ user });
 };
 
 module.exports = currentUser;
