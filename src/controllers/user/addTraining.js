@@ -1,10 +1,17 @@
-const { getTrainingTime } = require("../../helpers");
+const { getTrainingTime, RequestError } = require("../../helpers");
 const { User } = require("../../models/user");
 
 const addTraining = async (req, res) => {
     const { _id } = req.user;
+
     // eslint-disable-next-line camelcase
     const { date_start, date_finish } = req.body;
+    
+    // eslint-disable-next-line camelcase
+    if (date_start > date_finish) {
+        // eslint-disable-next-line camelcase
+        throw RequestError(400, `"date_start" must be less than "date_finish"`);
+    }
     const start = getTrainingTime(Number(date_start));
     const finish = getTrainingTime(Number(date_finish));
 

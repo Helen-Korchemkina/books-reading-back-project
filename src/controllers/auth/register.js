@@ -1,14 +1,8 @@
 const { RequestError } = require('../../helpers');
-const { User, schemas } = require('../../models/user');
+const { User } = require('../../models/user');
 const bcrypt = require('bcryptjs');
 
 const register = async (req, res) => {
-  const { error } = schemas.joiRegisterSchema.validate(req.body);
-
-  if (error) {
-    throw RequestError(400, error.message);
-  }
-
   const { name, email, password } = req.body;
   const user = await User.findOne({ email });
 

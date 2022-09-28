@@ -1,4 +1,4 @@
-const dateTrainingValidation = (value) => {
+const dateTrainingValidation = (value, helpers) => {
     const date = new Date();
     const dateNow = date.setHours(0, 0, 0, 0);
 

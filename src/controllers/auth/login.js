@@ -1,5 +1,5 @@
 const { RequestError } = require('../../helpers');
-const { User, schemas } = require('../../models/user');
+const { User } = require('../../models/user');
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -7,12 +7,6 @@ const jwt = require('jsonwebtoken');
 const { SECRET_KEY } = process.env;
 
 const login = async (req, res) => {
-  const { error } = schemas.joiLoginSchema.validate(req.body);
-
-  if (error) {
-    throw RequestError(400, error.message);
-  }
-
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
