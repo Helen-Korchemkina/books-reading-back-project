@@ -13,12 +13,10 @@ const add = async (req, res) => {
       400,
       'A book with the same name by this author has already been added!'
     );
-  const statistics = await bookService.addStatistics(book._id);
 
   res.status(201).json({
     data: {
-      book: book,
-      statistics,
+      book,
     },
   });
 };

@@ -21,7 +21,7 @@ const statisticsSchema = new Schema(
     },
     owner: {
       type: Schema.Types.ObjectId,
-      ref: 'book',
+      ref: 'user',
       required: true,
     },
   },
