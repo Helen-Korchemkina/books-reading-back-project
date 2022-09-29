@@ -1,193 +1,191 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "version": "1.0.0",
-      "title": "Books-readihgAPI",
-      "description": "REST API Application"
-     
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Books-readihgAPI",
+    "description": "REST API Application"
+  },
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "servers": [{ "url": "http://localhost:3001" }],
+  "tags": [
+    {
+      "name": "User",
+      "description": "User endpoints"
     },
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
-    "servers": [{ "url": "http://localhost:3001" }],
-    "tags": [
-      {
-        "name": "User",
-        "description": "User endpoints"
-      },
-      {
-        "name": "Book",
-        "description": "Book endpoints"
-      }
-    ],
+    {
+      "name": "Book",
+      "description": "Book endpoints"
+    }
+  ],
 
-    "paths": {
-      "/api/auth/register": {
-        "post": {
-          "tags": ["User"],
-          "summary": "User registration",
-          "parameters": [],
-          "security": [{ "Bearer": [] }],
-          "requestBody": {
-            "description": "Registration's object",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RegistrationRequest"
-                }
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "tags": ["User"],
+        "summary": "User registration",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationRequest"
               }
             }
-          },
-          "responses": {
-            "201": {
-              "description": "Successful operation",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/RegistrationResponse"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Bad request (invalid request body)",
-              "content": {}
-            },
-            "409": {
-              "description": "Provided email already exists",
-              "content": {}
-            }
-          }
-        }
-      },
-      "/api/auth/login": {
-        "post": {
-          "tags": ["User"],
-          "summary": "User login",
-          "parameters": [],
-          "security": [{ "Bearer": [] }],
-          "requestBody": {
-            "description": "Login's object",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LoginRequest"
-                }
-              }
-            }
-          },
-          
-          "responses": {
-            "200": {
-              "description": "Successful operation",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/LoginResponse"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {}
-            },
-            "401": {
-              "description": "Email or password is wrong",
-              "content": {}
-            }
-          }
-        }
-      },
-      "/api/auth/logout": {
-        "get": {
-          "tags": ["User"],
-          "summary": "User logout",
-          "parameters": [],
-          "security": [{ "Bearer": [] }],
-        
-          "responses": {
-            "204": {
-              "description": "Successful operation"
-            },
-            "401": {
-              "description": "Not authorized",
-              "content": {}
-            }
-          }
-        }
-      },
-      "/api/users/current": {
-        "get": {
-          "tags": ["User"],
-          "summary": "Get user's information by access token",
-          "parameters": [],
-          "security": [{ "Bearer": [] }],
-        
-          "responses": {
-            "201": {
-              "description": "Successful operation",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/CurrentUserResponse"
-                  }
-                }
-              }
-            },
-            "401": {
-              "description": "Not authorized (invalid access token)",
-              "content": {}
-            }
-          }
-        }
-      }
-    },
-    "components": {
-      "schemas": {
-        "RegistrationRequest": {
-          "type": "object",
-          "required": ["name", "email", "password", "confirm_password"],
-          "properties": {
-            "name": {
-                "type": "string",
-                "description": "User's name",
-                "example": "Petro"
-            },
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email",
-              "example": "petro@gmail.com"
-
-            },
-            "password": {
-              "type": "string",
-              "description": "User's password",
-              "example": "qwerty123"
-            },
-            "confirm_password": {
-                "type": "string",
-                "description": "User's password",
-                "example": "qwerty123"
-              }
           }
         },
-        "RegistrationResponse": {
-         "type": "object",
-            "properties": {
-              "status": {
-                    "type": "string",
-                    "description": "success",
-                    "example": "success"                 
-                  },
-              "code": {
-                "type": "integer",
-                "description": "201 status code",
-                "example": "201" 
-            },
-            "data": {
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "409": {
+            "description": "Provided email already exists",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["User"],
+        "summary": "User login",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Login's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Email or password is wrong",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "get": {
+        "tags": ["User"],
+        "summary": "User logout",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "responses": {
+          "204": {
+            "description": "Successful operation"
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/current": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get user's information by access token",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized (invalid access token)",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegistrationRequest": {
+        "type": "object",
+        "required": ["name", "email", "password", "confirm_password"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Petro"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email",
+            "example": "petro@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          },
+          "confirm_password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          }
+        }
+      },
+      "RegistrationResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "success",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "201 status code",
+            "example": "201"
+          },
+          "data": {
             "type": "object",
             "description": "Users data",
             "properties": {
@@ -203,110 +201,118 @@
                     "type": "string",
                     "description": "User's email",
                     "example": "petro@gmail.com"
-                  }}}}}}},
-
-        "LoginRequest": {
-                    "type": "object",
-                    "required": [
-                      "email",
-                      "password"
-                    ],
-                    "properties": {
-                      "email": {
-                        "type": "string",
-                        "description": "User's email",
-                        "format": "email",
-                        "example": "petro@gmail.com"
-                      },
-                      "password": {
-                        "type": "string",
-                        "description": "User's password",
-                        "example": "qwerty123"
-                      }
-                    }},
-        "LoginResponse": {
-                        "type": "object",
-                        "properties": {
-                          "status": {
-                            "type": "string",
-                            "description": "success",
-                            "example": "success"
-                          },
-                          "code": {
-                            "type": "integer",
-                            "description": "200 status code",
-                            "example": "200"
-                          },
-                          "data": {
-                            "type": "object",
-                            "description": "Users data",
-                            "properties": {
-                           "token": {
-                                "type": "string",
-                                "description": "valid token",
-                                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZmMyMDg1YmQwOTM2NTI4MTA3Y2UyNzQiLCJzaWQiOiI1ZmMyZDJmY2UxZDIwNTA2NzAyYmRkMjIiLCJpYXQiOjE2MDY2MDM1MTYsImV4cCI6MTYwNjYwNzExNn0.rJ_QjU4KvA76H96RHsvOBChK0Vjbd0NmqjMxdQVJIXA"
-                              },
-                             
-                              "user": {
-                                "type": "object",
-                                "properties": {
-                                  "name": {
-                                    "type": "string",
-                                    "description": "Users name",
-                                    "example": "Petro"
-                                  },
-                                  "email": {
-                                    "type": "string",
-                                    "description": "User's email",
-                                    "format": "email",
-                                    "example": "petro@gmail.com"
-
-                                  }
-            }}}}}},
-            "CurrentUserResponse": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "description": "success",
-                    "example": "success"
-                  },
-                  "code": {
-                    "type": "integer",
-                    "description": "201 status code",
-                    "example": "201"
-                  },
-                  "data": {
-                    "type": "object",
-                    "description": "Users data",
-                    "properties": {
-                      "user": {
-                        "type": "object",
-                        "properties": {
-                          "name": {
-                            "type": "string",
-                            "description": "Users name",
-                            "example": "Petro"
-                          },
-                          "email": {
-                            "type": "string",
-                            "description": "User's email",
-                            "format": "email",
-                            "example": "petro@gmail.com"
-                          }
-                        }
-                      }
-                    }
                   }
                 }
               }
-    },
-      "securitySchemes": {
-        "Bearer": {
-          "type": "http",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
+            }
+          }
         }
+      },
+
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email",
+            "example": "petro@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "success",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "200 status code",
+            "example": "200"
+          },
+          "data": {
+            "type": "object",
+            "description": "Users data",
+            "properties": {
+              "token": {
+                "type": "string",
+                "description": "valid token",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZmMyMDg1YmQwOTM2NTI4MTA3Y2UyNzQiLCJzaWQiOiI1ZmMyZDJmY2UxZDIwNTA2NzAyYmRkMjIiLCJpYXQiOjE2MDY2MDM1MTYsImV4cCI6MTYwNjYwNzExNn0.rJ_QjU4KvA76H96RHsvOBChK0Vjbd0NmqjMxdQVJIXA"
+              },
+
+              "user": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Users name",
+                    "example": "Petro"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "User's email",
+                    "format": "email",
+                    "example": "petro@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "CurrentUserResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "success",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "201 status code",
+            "example": "201"
+          },
+          "data": {
+            "type": "object",
+            "description": "Users data",
+            "properties": {
+              "user": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Users name",
+                    "example": "Petro"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "User's email",
+                    "format": "email",
+                    "example": "petro@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
+}
