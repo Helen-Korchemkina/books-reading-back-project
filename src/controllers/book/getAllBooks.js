@@ -2,12 +2,13 @@ const bookService = require('../../service/book');
 const { RequestError } = require('../../helpers');
 
 const getAllBooks = async (req, res) => {
-  const { _id } = req.user;
+  const { id } = req.user;
+  console.log('_id :>> ', id);
 
-  const allBooks = await bookService.getAllBooks(_id);
+  const allBooks = await bookService.getAllBooks(id);
   if (allBooks.length === 0) throw RequestError(404, 'No books');
 
-  res.status(200).json({ data: getAllBooks });
+  res.status(200).json({ data: allBooks });
 };
 
 module.exports = getAllBooks;
