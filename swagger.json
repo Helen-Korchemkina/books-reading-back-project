@@ -6,12 +6,8 @@
     "description": "REST API Application"
   },
 
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "servers": [
     {
       "url": "https://books-reading-project.herokuapp.com"
@@ -19,7 +15,6 @@
     {
       "url": "http://localhost:3001"
     }
-   
   ],
   "tags": [
     {
@@ -27,7 +22,6 @@
       "description": "User endpoints"
     },
     {
-
       "name": "Book",
       "description": "Book endpoints"
     }
@@ -35,9 +29,7 @@
   "paths": {
     "/api/auth/register": {
       "post": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "User registration",
         "parameters": [],
         "security": [
@@ -80,9 +72,7 @@
     },
     "/api/auth/login": {
       "post": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "User login",
         "parameters": [],
         "security": [
@@ -125,9 +115,7 @@
     },
     "/api/auth/logout": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "User logout",
         "parameters": [],
         "security": [
@@ -148,9 +136,7 @@
     },
     "/api/users/current": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Get user's information",
         "parameters": [],
         "security": [
@@ -178,9 +164,7 @@
     },
     "/api/users/training": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Get training",
         "parameters": [],
         "security": [
@@ -194,7 +178,6 @@
           "content": {
             "application/json": {
               "schema": {
-
                 "$ref": "#/components/schemas/AddTrainingRequest"
               }
             }
@@ -218,9 +201,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Add training date",
         "parameters": [],
         "security": [
@@ -253,9 +234,7 @@
 
     "/api/book/": {
       "post": {
-        "tags": [
-          "Book"
-        ],
+        "tags": ["Book"],
         "summary": "Post a book",
         "security": [
           {
@@ -284,7 +263,7 @@
                 }
               }
             }
-          }
+          },
           "400": {
             "description": "Bad request (invalid request body) / book must have at least one page",
             "content": {}
@@ -300,9 +279,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Book"
-        ],
+        "tags": ["Book"],
         "summary": "Get all books",
         "security": [
           {
@@ -337,9 +314,7 @@
     },
     "/api/book/statistics": {
       "get": {
-        "tags": [
-          "Book"
-        ],
+        "tags": ["Book"],
         "summary": "Get statistics",
         "security": [
           {
@@ -353,7 +328,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/StatisticsResponse"
-
                 }
               }
             }
@@ -375,9 +349,7 @@
     },
     "/api/book/:bookId/review": {
       "patch": {
-        "tags": [
-          "Book"
-        ],
+        "tags": ["Book"],
         "summary": "Update resume",
         "security": [
           {
@@ -424,9 +396,7 @@
     },
     "/api/book/:userId/statistics": {
       "patch": {
-        "tags": [
-          "Book"
-        ],
+        "tags": ["Book"],
         "summary": "Update statistics",
         "security": [
           {
@@ -473,9 +443,7 @@
     },
     "/api/book/:bookId/status": {
       "patch": {
-        "tags": [
-          "Book"
-        ],
+        "tags": ["Book"],
         "summary": "Update status",
         "security": [
           {
@@ -522,9 +490,7 @@
     },
     "/api/book/:bookId": {
       "patch": {
-        "tags": [
-          "Book"
-        ],
+        "tags": ["Book"],
         "summary": "Update a book",
         "security": [
           {
@@ -569,9 +535,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Book"
-        ],
+        "tags": ["Book"],
         "summary": "Delete book",
         "security": [
           {
@@ -617,12 +581,7 @@
     "schemas": {
       "RegistrationRequest": {
         "type": "object",
-        "required": [
-          "name",
-          "email",
-          "password",
-          "confirm_password"
-        ],
+        "required": ["name", "email", "password", "confirm_password"],
         "properties": {
           "name": {
             "type": "string",
@@ -685,10 +644,7 @@
       },
       "LoginRequest": {
         "type": "object",
-        "required": [
-          "email",
-          "password"
-        ],
+        "required": ["email", "password"],
         "properties": {
           "email": {
             "type": "string",
@@ -803,12 +759,7 @@
       },
       "BookRequest": {
         "type": "object",
-        "required": [
-          "title",
-          "author",
-          "releaseDate",
-          "countOfPages"
-        ],
+        "required": ["title", "author", "releaseDate", "countOfPages"],
         "properties": {
           "title": {
             "type": "string",
@@ -876,24 +827,13 @@
                   },
                   "status": {
                     "type": "string",
-                    "oneOf": [
-                      "Going to read",
-                      "Already read",
-                      "Reading now"
-                    ],
+                    "oneOf": ["Going to read", "Already read", "Reading now"],
                     "description": "status",
                     "example": "Going to read"
                   },
                   "raiting": {
                     "type": "number",
-                    "oneOf": [
-                      0,
-                      1,
-                      2,
-                      3,
-                      4,
-                      5
-                    ],
+                    "oneOf": [0, 1, 2, 3, 4, 5],
                     "description": "raiting",
                     "example": "0"
                   },
@@ -1005,24 +945,13 @@
                     },
                     "status": {
                       "type": "string",
-                      "oneOf": [
-                        "Going to read",
-                        "Already read",
-                        "Reading now"
-                      ],
+                      "oneOf": ["Going to read", "Already read", "Reading now"],
                       "description": "status",
                       "example": "Going to read"
                     },
                     "raiting": {
                       "type": "number",
-                      "oneOf": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5
-                      ],
+                      "oneOf": [0, 1, 2, 3, 4, 5],
                       "description": "raiting",
                       "example": "0"
                     },
@@ -1072,10 +1001,7 @@
       },
       "UpdateResumeRequest": {
         "type": "object",
-        "required": [
-          "raiting",
-          "resume"
-        ],
+        "required": ["raiting", "resume"],
         "properties": {
           "raiting": {
             "type": "number",
@@ -1113,11 +1039,7 @@
       },
       "UpdateStatisticsRequest": {
         "type": "object",
-        "required": [
-          "readDate",
-          "readTime",
-          "numberOfPage"
-        ],
+        "required": ["readDate", "readTime", "numberOfPage"],
         "properties": {
           "readDate": {
             "type": "string",
@@ -1159,9 +1081,7 @@
       },
       "UpdateStatusRequest": {
         "type": "object",
-        "required": [
-          "status"
-        ],
+        "required": ["status"],
         "properties": {
           "status": {
             "type": "string",
@@ -1306,10 +1226,7 @@
       },
       "AddTrainingRequest": {
         "type": "object",
-        "required": [
-          "date_start",
-          "date_finish"
-        ],
+        "required": ["date_start", "date_finish"],
         "properties": {
           "date_start": {
             "type": "integer"
@@ -1335,3 +1252,4 @@
       }
     }
   }
+}
