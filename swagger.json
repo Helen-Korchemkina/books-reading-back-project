@@ -13,11 +13,12 @@
   ],
   "servers": [
     {
-      "url": "http://localhost:3001/api-docs/"
+      "url": "https://books-reading-project.herokuapp.com"
     },
     {
-      "url": "https://books-reading-project.herokuapp.com/api-docs/"
+      "url": "http://localhost:3001"
     }
+   
   ],
   "tags": [
     {
