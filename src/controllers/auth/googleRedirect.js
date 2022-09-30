@@ -2,6 +2,7 @@ const queryString = require('query-string');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const { User } = require('../../models/user');
+const statisticsService = require('../../service/statistics');
 
 const {
   GOOGLE_CLIENT_ID,
@@ -42,9 +43,9 @@ const googleRedirect = async (req, res) => {
   let user = await User.findOne({ email });
 
   if (!user) {
-
     await User.create({ name: given_name, email });
     user = await User.findOne({ email });
+    await statisticsService.addStatistics(user._id);
   }
 
   const payload = {
@@ -56,7 +57,7 @@ const googleRedirect = async (req, res) => {
 
   return res.redirect(
     // eslint-disable-next-line camelcase
-    `${FRONTEND_URL}?token=${token}&name=${given_name}&email=${email}`
+    `${FRONTEND_URL}/answer-google?token=${token}&name=${given_name}&email=${email}`
   );
 };
 
