@@ -5,9 +5,12 @@
     "title": "Books-readihgAPI",
     "description": "REST API Application"
   },
-
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "servers": [
     {
       "url": "https://books-reading-project.herokuapp.com"
@@ -24,12 +27,18 @@
     {
       "name": "Book",
       "description": "Book endpoints"
+    },
+    {
+      "name": "Statistic",
+      "description": "Statistic endpoints"
     }
   ],
   "paths": {
     "/api/auth/register": {
       "post": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "User registration",
         "parameters": [],
         "security": [
@@ -72,7 +81,9 @@
     },
     "/api/auth/login": {
       "post": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "User login",
         "parameters": [],
         "security": [
@@ -115,7 +126,9 @@
     },
     "/api/auth/logout": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "User logout",
         "parameters": [],
         "security": [
@@ -136,7 +149,9 @@
     },
     "/api/users/current": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Get user's information",
         "parameters": [],
         "security": [
@@ -164,7 +179,9 @@
     },
     "/api/users/training": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Get training",
         "parameters": [],
         "security": [
@@ -201,7 +218,9 @@
         }
       },
       "patch": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Add training date",
         "parameters": [],
         "security": [
@@ -231,10 +250,11 @@
         }
       }
     },
-
     "/api/book/": {
       "post": {
-        "tags": ["Book"],
+        "tags": [
+          "Book"
+        ],
         "summary": "Post a book",
         "security": [
           {
@@ -279,7 +299,9 @@
         }
       },
       "get": {
-        "tags": ["Book"],
+        "tags": [
+          "Book"
+        ],
         "summary": "Get all books",
         "security": [
           {
@@ -312,44 +334,11 @@
         }
       }
     },
-    "/api/book/statistics": {
-      "get": {
-        "tags": ["Book"],
-        "summary": "Get statistics",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StatisticsResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Bad Request",
-            "content": {}
-          },
-          "401": {
-            "description": "Unauthorized user",
-            "content": {}
-          },
-          "500": {
-            "description": "Database Error",
-            "content": {}
-          }
-        }
-      }
-    },
     "/api/book/:bookId/review": {
       "patch": {
-        "tags": ["Book"],
+        "tags": [
+          "Book"
+        ],
         "summary": "Update resume",
         "security": [
           {
@@ -394,56 +383,11 @@
         }
       }
     },
-    "/api/book/:userId/statistics": {
-      "patch": {
-        "tags": ["Book"],
-        "summary": "Update statistics",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "parameters": [],
-        "requestBody": {
-          "description": "Statistics object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateStatisticsRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StatisticsResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Еhe book does not exist",
-            "content": {}
-          },
-          "401": {
-            "description": "Unauthorized user",
-            "content": {}
-          },
-          "500": {
-            "description": "Database Error",
-            "content": {}
-          }
-        }
-      }
-    },
     "/api/book/:bookId/status": {
       "patch": {
-        "tags": ["Book"],
+        "tags": [
+          "Book"
+        ],
         "summary": "Update status",
         "security": [
           {
@@ -490,7 +434,9 @@
     },
     "/api/book/:bookId": {
       "patch": {
-        "tags": ["Book"],
+        "tags": [
+          "Book"
+        ],
         "summary": "Update a book",
         "security": [
           {
@@ -535,7 +481,9 @@
         }
       },
       "delete": {
-        "tags": ["Book"],
+        "tags": [
+          "Book"
+        ],
         "summary": "Delete book",
         "security": [
           {
@@ -575,13 +523,104 @@
           }
         }
       }
+    },
+    "/api/statistics/": {
+      "get": {
+        "tags": [
+          "Statistic"
+        ],
+        "summary": "Get statistics",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatisticsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "500": {
+            "description": "Database Error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/statistics/:userId/": {
+      "patch": {
+        "tags": [
+          "Statistic"
+        ],
+        "summary": "Update statistics",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Statistics object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStatisticsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatisticsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Еhe book does not exist",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "500": {
+            "description": "Database Error",
+            "content": {}
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
       "RegistrationRequest": {
         "type": "object",
-        "required": ["name", "email", "password", "confirm_password"],
+        "required": [
+          "name",
+          "email",
+          "password",
+          "confirm_password"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -644,7 +683,10 @@
       },
       "LoginRequest": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": [
+          "email",
+          "password"
+        ],
         "properties": {
           "email": {
             "type": "string",
@@ -723,7 +765,6 @@
                 "description": "valid token",
                 "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZmMyMDg1YmQwOTM2NTI4MTA3Y2UyNzQiLCJzaWQiOiI1ZmMyZDJmY2UxZDIwNTA2NzAyYmRkMjIiLCJpYXQiOjE2MDY2MDM1MTYsImV4cCI6MTYwNjYwNzExNn0.rJ_QjU4KvA76H96RHsvOBChK0Vjbd0NmqjMxdQVJIXA"
               },
-
               "user": {
                 "type": "object",
                 "properties": {
@@ -759,7 +800,12 @@
       },
       "BookRequest": {
         "type": "object",
-        "required": ["title", "author", "releaseDate", "countOfPages"],
+        "required": [
+          "title",
+          "author",
+          "releaseDate",
+          "countOfPages"
+        ],
         "properties": {
           "title": {
             "type": "string",
@@ -827,13 +873,24 @@
                   },
                   "status": {
                     "type": "string",
-                    "oneOf": ["Going to read", "Already read", "Reading now"],
+                    "oneOf": [
+                      "Going to read",
+                      "Already read",
+                      "Reading now"
+                    ],
                     "description": "status",
                     "example": "Going to read"
                   },
                   "raiting": {
                     "type": "number",
-                    "oneOf": [0, 1, 2, 3, 4, 5],
+                    "oneOf": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5
+                    ],
                     "description": "raiting",
                     "example": "0"
                   },
@@ -945,13 +1002,24 @@
                     },
                     "status": {
                       "type": "string",
-                      "oneOf": ["Going to read", "Already read", "Reading now"],
+                      "oneOf": [
+                        "Going to read",
+                        "Already read",
+                        "Reading now"
+                      ],
                       "description": "status",
                       "example": "Going to read"
                     },
                     "raiting": {
                       "type": "number",
-                      "oneOf": [0, 1, 2, 3, 4, 5],
+                      "oneOf": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                      ],
                       "description": "raiting",
                       "example": "0"
                     },
@@ -1001,7 +1069,10 @@
       },
       "UpdateResumeRequest": {
         "type": "object",
-        "required": ["raiting", "resume"],
+        "required": [
+          "raiting",
+          "resume"
+        ],
         "properties": {
           "raiting": {
             "type": "number",
@@ -1039,7 +1110,11 @@
       },
       "UpdateStatisticsRequest": {
         "type": "object",
-        "required": ["readDate", "readTime", "numberOfPage"],
+        "required": [
+          "readDate",
+          "readTime",
+          "numberOfPage"
+        ],
         "properties": {
           "readDate": {
             "type": "string",
@@ -1081,7 +1156,9 @@
       },
       "UpdateStatusRequest": {
         "type": "object",
-        "required": ["status"],
+        "required": [
+          "status"
+        ],
         "properties": {
           "status": {
             "type": "string",
@@ -1226,7 +1303,10 @@
       },
       "AddTrainingRequest": {
         "type": "object",
-        "required": ["date_start", "date_finish"],
+        "required": [
+          "date_start",
+          "date_finish"
+        ],
         "properties": {
           "date_start": {
             "type": "integer"
@@ -1235,13 +1315,6 @@
             "type": "integer"
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "Bearer": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
       }
     },
     "securitySchemes": {
