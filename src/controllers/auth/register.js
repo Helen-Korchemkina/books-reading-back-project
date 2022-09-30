@@ -1,14 +1,9 @@
 const { RequestError } = require('../../helpers');
-const { User, schemas } = require('../../models/user');
+const { User } = require('../../models/user');
+const statisticsService = require('../../service/statistics');
 const bcrypt = require('bcryptjs');
 
 const register = async (req, res) => {
-  const { error } = schemas.joiRegisterSchema.validate(req.body);
-
-  if (error) {
-    throw RequestError(400, error.message);
-  }
-
   const { name, email, password } = req.body;
   const user = await User.findOne({ email });
 
@@ -18,10 +13,12 @@ const register = async (req, res) => {
 
   const hashPassword = await bcrypt.hash(password, 10);
   const result = await User.create({ name, email, password: hashPassword });
+  const statistics = await statisticsService.addStatistics(result._id);
 
   res.status(201).json({
     name: result.name,
     email: result.email,
+    statistics: statistics,
   });
 };
 

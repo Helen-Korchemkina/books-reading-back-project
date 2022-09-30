@@ -1,7 +1,7 @@
 const { Statistics } = require('../../models');
 
-const getStatistics = async bookId => {
-  return await Statistics.findOne({ owner: bookId }).select({
+const getStatistics = async userId => {
+  return await Statistics.findOne({ owner: userId }).select({
     owner: 0,
     createdAt: 0,
     updatedAt: 0,
