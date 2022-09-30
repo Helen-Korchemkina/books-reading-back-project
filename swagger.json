@@ -5,27 +5,46 @@
     "title": "Books-readihgAPI",
     "description": "REST API Application"
   },
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "servers": [{ "url": "http://localhost:3001" }],
+
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "servers": [
+    {
+      "url": "https://books-reading-project.herokuapp.com"
+    },
+    {
+      "url": "http://localhost:3001"
+    }
+   
+  ],
   "tags": [
     {
       "name": "User",
       "description": "User endpoints"
     },
     {
+
       "name": "Book",
       "description": "Book endpoints"
     }
   ],
-
   "paths": {
     "/api/auth/register": {
       "post": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "User registration",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -61,10 +80,16 @@
     },
     "/api/auth/login": {
       "post": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "User login",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Login's object",
           "required": true,
@@ -76,7 +101,6 @@
             }
           }
         },
-
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -101,11 +125,16 @@
     },
     "/api/auth/logout": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "User logout",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
-
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "204": {
             "description": "Successful operation"
@@ -119,11 +148,16 @@
     },
     "/api/users/current": {
       "get": {
-        "tags": ["User"],
-        "summary": "Get user's information by access token",
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user's information",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
-
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "201": {
             "description": "Successful operation",
@@ -141,13 +175,454 @@
           }
         }
       }
+    },
+    "/api/users/training": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get training",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "requestBody": {
+          "description": "Add training object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+
+                "$ref": "#/components/schemas/AddTrainingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTrainingResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "invalid token or token expired",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add training date",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddTrainingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Email or password is wrong",
+            "content": {}
+          }
+        }
+      }
+    },
+
+    "/api/book/": {
+      "post": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Post a book",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Book object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookResponse"
+                }
+              }
+            }
+          }
+          "400": {
+            "description": "Bad request (invalid request body) / book must have at least one page",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "500": {
+            "description": "Database Error",
+            "content": {}
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Get all books",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllBooksResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "500": {
+            "description": "Database Error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/book/statistics": {
+      "get": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Get statistics",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatisticsResponse"
+
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "500": {
+            "description": "Database Error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/book/:bookId/review": {
+      "patch": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Update resume",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Resume object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateResumeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResumeResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Еhe book does not exist",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "500": {
+            "description": "Database Error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/book/:userId/statistics": {
+      "patch": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Update statistics",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Statistics object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStatisticsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatisticsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Еhe book does not exist",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "500": {
+            "description": "Database Error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/book/:bookId/status": {
+      "patch": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Update status",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Status object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStatusRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateStatusResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Еhe book does not exist",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "500": {
+            "description": "Database Error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/book/:bookId": {
+      "patch": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Update a book",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Book object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Еhe book does not exist",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "500": {
+            "description": "Database Error",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Book"
+        ],
+        "summary": "Delete book",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bookId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteBookResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Еhe book does not exist",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "500": {
+            "description": "Database Error",
+            "content": {}
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
       "RegistrationRequest": {
         "type": "object",
-        "required": ["name", "email", "password", "confirm_password"],
+        "required": [
+          "name",
+          "email",
+          "password",
+          "confirm_password"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -208,10 +683,12 @@
           }
         }
       },
-
       "LoginRequest": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": [
+          "email",
+          "password"
+        ],
         "properties": {
           "email": {
             "type": "string",
@@ -248,7 +725,6 @@
                 "description": "valid token",
                 "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZmMyMDg1YmQwOTM2NTI4MTA3Y2UyNzQiLCJzaWQiOiI1ZmMyZDJmY2UxZDIwNTA2NzAyYmRkMjIiLCJpYXQiOjE2MDY2MDM1MTYsImV4cCI6MTYwNjYwNzExNn0.rJ_QjU4KvA76H96RHsvOBChK0Vjbd0NmqjMxdQVJIXA"
               },
-
               "user": {
                 "type": "object",
                 "properties": {
@@ -286,6 +762,12 @@
             "type": "object",
             "description": "Users data",
             "properties": {
+              "token": {
+                "type": "string",
+                "description": "valid token",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1ZmMyMDg1YmQwOTM2NTI4MTA3Y2UyNzQiLCJzaWQiOiI1ZmMyZDJmY2UxZDIwNTA2NzAyYmRkMjIiLCJpYXQiOjE2MDY2MDM1MTYsImV4cCI6MTYwNjYwNzExNn0.rJ_QjU4KvA76H96RHsvOBChK0Vjbd0NmqjMxdQVJIXA"
+              },
+
               "user": {
                 "type": "object",
                 "properties": {
@@ -299,10 +781,541 @@
                     "description": "User's email",
                     "format": "email",
                     "example": "petro@gmail.com"
+                  },
+                  "_id": {
+                    "type": "string",
+                    "description": "Backend-generated unique identifier",
+                    "example": "62e654c37db24cc7c05b6440"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "description": "data of created"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "description": "data of update"
                   }
                 }
               }
             }
+          }
+        }
+      },
+      "BookRequest": {
+        "type": "object",
+        "required": [
+          "title",
+          "author",
+          "releaseDate",
+          "countOfPages"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "title of book"
+          },
+          "author": {
+            "type": "string",
+            "description": "author of book"
+          },
+          "releaseDate": {
+            "type": "string",
+            "description": "release date of book"
+          },
+          "countOfPages": {
+            "type": "number",
+            "description": "count Of pages"
+          }
+        }
+      },
+      "BookResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "success",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "201 status code",
+            "example": "201"
+          },
+          "data": {
+            "type": "object",
+            "description": "Book Post data",
+            "properties": {
+              "book": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "title of book"
+                  },
+                  "author": {
+                    "type": "string",
+                    "description": "author of book"
+                  },
+                  "releaseDate": {
+                    "type": "string",
+                    "description": "release date of book"
+                  },
+                  "countOfPages": {
+                    "type": "number",
+                    "description": "count Of pages"
+                  },
+                  "owner": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "description": "owner id",
+                        "example": "62e68c9aa0282191081ba3ec"
+                      }
+                    }
+                  },
+                  "status": {
+                    "type": "string",
+                    "oneOf": [
+                      "Going to read",
+                      "Already read",
+                      "Reading now"
+                    ],
+                    "description": "status",
+                    "example": "Going to read"
+                  },
+                  "raiting": {
+                    "type": "number",
+                    "oneOf": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5
+                    ],
+                    "description": "raiting",
+                    "example": "0"
+                  },
+                  "resume": {
+                    "type": "string",
+                    "description": "resume of book"
+                  },
+                  "_id": {
+                    "type": "string",
+                    "description": "Backend-generated unique identifier",
+                    "example": "62e654c37db24cc7c05b6440"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "description": "data of created"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "description": "data of update"
+                  }
+                }
+              },
+              "statistics": {
+                "type": "object",
+                "properties": {
+                  "readDate": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "readTime": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "numberOfPagesRead": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "owner": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "description": "owner id",
+                        "example": "62e68c9aa0282191081ba3ec"
+                      }
+                    }
+                  },
+                  "_id": {
+                    "type": "string",
+                    "description": "Backend-generated unique identifier",
+                    "example": "62e654c37db24cc7c05b6440"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "description": "data of created"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "description": "data of update"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAllBooksResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "success",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "200 status code",
+            "example": "200"
+          },
+          "data": {
+            "type": "array",
+            "description": "All books data",
+            "items": {
+              "properties": {
+                "book": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "title of book"
+                    },
+                    "author": {
+                      "type": "string",
+                      "description": "author of book"
+                    },
+                    "releaseDate": {
+                      "type": "string",
+                      "description": "release date of book"
+                    },
+                    "countOfPages": {
+                      "type": "number",
+                      "description": "count Of pages"
+                    },
+                    "status": {
+                      "type": "string",
+                      "oneOf": [
+                        "Going to read",
+                        "Already read",
+                        "Reading now"
+                      ],
+                      "description": "status",
+                      "example": "Going to read"
+                    },
+                    "raiting": {
+                      "type": "number",
+                      "oneOf": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                      ],
+                      "description": "raiting",
+                      "example": "0"
+                    },
+                    "resume": {
+                      "type": "string",
+                      "description": "resume of book"
+                    },
+                    "_id": {
+                      "type": "string",
+                      "description": "Backend-generated unique identifier",
+                      "example": "62e654c37db24cc7c05b6440"
+                    }
+                  }
+                },
+                "statistics": {
+                  "type": "object",
+                  "properties": {
+                    "readDate": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "readTime": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "numberOfPagesRead": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "_id": {
+                      "type": "string",
+                      "description": "Backend-generated unique identifier",
+                      "example": "62e654c37db24cc7c05b6440"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "UpdateResumeRequest": {
+        "type": "object",
+        "required": [
+          "raiting",
+          "resume"
+        ],
+        "properties": {
+          "raiting": {
+            "type": "number",
+            "description": "raiting of book"
+          },
+          "resume": {
+            "type": "string",
+            "description": "resume of book"
+          }
+        }
+      },
+      "UpdateResumeResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "success",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "200 status code",
+            "example": "200"
+          },
+          "data": {
+            "type": "object",
+            "description": "data",
+            "properties": {
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "UpdateStatisticsRequest": {
+        "type": "object",
+        "required": [
+          "readDate",
+          "readTime",
+          "numberOfPage"
+        ],
+        "properties": {
+          "readDate": {
+            "type": "string",
+            "description": "read date"
+          },
+          "readTime": {
+            "type": "string",
+            "description": "read time"
+          },
+          "numberOfPage": {
+            "type": "number",
+            "description": "number of page"
+          }
+        }
+      },
+      "UpdateStatisticsResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "success",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "200 status code",
+            "example": "200"
+          },
+          "data": {
+            "type": "object",
+            "description": "data",
+            "properties": {
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "UpdateStatusRequest": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "status of book"
+          }
+        }
+      },
+      "UpdateStatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "success",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "200 status code",
+            "example": "200"
+          },
+          "data": {
+            "type": "object",
+            "description": "data",
+            "properties": {
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "DeleteBookResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "book deleted",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "200 status code",
+            "example": "200"
+          },
+          "data": {
+            "type": "object",
+            "description": "data",
+            "properties": {
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "StatisticsResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Get statistics",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "200 status code",
+            "example": "200"
+          },
+          "data": {
+            "type": "object",
+            "description": "Statistics data",
+            "properties": {
+              "statistics": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "Backend-generated unique identifier",
+                    "example": "62e654c37db24cc7c05b6440"
+                  },
+                  "readDate": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "readTime": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "numberOfPagesRead": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetTrainingResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Get statistics",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "201 status code",
+            "example": "201"
+          },
+          "data": {
+            "type": "object",
+            "description": "Training data",
+            "properties": {
+              "training": {
+                "type": "object",
+                "properties": {
+                  "start": {
+                    "type": "string"
+                  },
+                  "startMillisecond": {
+                    "type": "integer"
+                  },
+                  "finish": {
+                    "type": "string"
+                  },
+                  "finishMillisecond": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "AddTrainingRequest": {
+        "type": "object",
+        "required": [
+          "date_start",
+          "date_finish"
+        ],
+        "properties": {
+          "date_start": {
+            "type": "integer"
+          },
+          "date_finish": {
+            "type": "integer"
           }
         }
       }
@@ -313,6 +1326,12 @@
         "scheme": "bearer",
         "bearerFormat": "JWT"
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
   }
-}
