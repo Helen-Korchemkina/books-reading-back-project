@@ -12,25 +12,25 @@ routerBook.get('/', controllerWrapper(bookControllers.getAllBooks));
 
 routerBook.post(
   '/',
-  validationBody(bookJoiSchemas.addSchema),
+  validationBody(bookJoiSchemas.j2saddSchema),
   controllerWrapper(bookControllers.addBook)
 );
 
 routerBook.patch(
   '/:bookId',
-  validationBody(bookJoiSchemas.addSchema),
+  validationBody(bookJoiSchemas.j2saddSchema),
   controllerWrapper(bookControllers.updateBook)
 );
 
 routerBook.patch(
   '/:bookId/review',
-  validationBody(bookJoiSchemas.reviewSchema),
+  validationBody(bookJoiSchemas.j2sreviewSchema),
   controllerWrapper(bookControllers.addReviews)
 );
 
 routerBook.patch(
   '/:bookId/status',
-  validationBody(bookJoiSchemas.updateStatus),
+  validationBody(bookJoiSchemas.j2supdateStatus),
   controllerWrapper(bookControllers.updateBook)
 );
 

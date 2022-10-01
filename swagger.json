@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "4.5.0",
   "info": {
     "version": "1.0.0",
     "title": "Books-readihgAPI",
@@ -572,7 +572,20 @@
             "Bearer": []
           }
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "requestBody": {
           "description": "Statistics object",
           "required": true,

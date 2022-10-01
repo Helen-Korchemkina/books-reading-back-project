@@ -1,6 +1,10 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
-const { handleSchemaValidationError, dateTrainingValidation } = require('../helpers');
+const j2s = require('joi-to-swagger');
+const {
+  handleSchemaValidationError,
+  dateTrainingValidation,
+} = require('../helpers');
 
 const nameRegex = /^[a-zA-Z]+$/;
 const emailRegex = /^[\w.]+@[\w.]+.[\w.]+$/;
@@ -9,44 +13,43 @@ const dateMessage = {
   'string.min': `{#label} should have a minimum length of {#limit}`,
   'string.pattern.base': `{#label} should have contain only numbers`,
   'string.empty': `{#label} is not allowed to be empty`,
-  'any.required': `{#label} is a required field`
+  'any.required': `{#label} is a required field`,
 };
 
-const userSchema = new Schema({
-  name: {
-    type: String,
-    match: [nameRegex, 'Name must contain only letters'],
-    required: [true, 'Name is required'],
+const userSchema = new Schema(
+  {
+    name: {
+      type: String,
+      match: [nameRegex, 'Name must contain only letters'],
+      required: [true, 'Name is required'],
+    },
+    email: {
+      type: String,
+      required: [true, 'Email is required'],
+      match: emailRegex,
+      unique: true,
+    },
+    password: {
+      type: String,
+      default: '',
+    },
+    token: {
+      type: String,
+      default: '',
+    },
+    training: {
+      type: Object,
+      default: {},
+    },
   },
-  email: {
-    type: String,
-    required: [true, 'Email is required'],
-    match: emailRegex,
-    unique: true,
-  },
-  password: {
-    type: String,
-    default: '',
-  },
-  token: {
-    type: String,
-    default: '',
-  },
-  training: {
-    type: Object,
-    default: {},
-  }
-}, { versionKey: false, timestamps: true });
+  { versionKey: false, timestamps: true }
+);
 
 userSchema.post('save', handleSchemaValidationError);
 
 const joiRegisterSchema = Joi.object({
-  name: Joi.string()
-    .pattern(nameRegex)
-    .required(),
-  email: Joi.string()
-    .pattern(emailRegex)
-    .required(),
+  name: Joi.string().pattern(nameRegex).required(),
+  email: Joi.string().pattern(emailRegex).required(),
   password: Joi.string()
     .pattern(passwordRegex)
     .min(6)
@@ -57,17 +60,13 @@ const joiRegisterSchema = Joi.object({
       'string.max': `{#label} should have a maximum length of {#limit}`,
       'string.pattern.base': `{#label} may contain alphabet and symbols [_-]`,
       'string.empty': `{#label} is not allowed to be empty`,
-      'any.required': `{#label} is a required field`
+      'any.required': `{#label} is a required field`,
     }),
-  confirm_password: Joi.string()
-    .required()
-    .valid(Joi.ref('password')),
+  confirm_password: Joi.string().required().valid(Joi.ref('password')),
 });
 
 const joiLoginSchema = Joi.object({
-  email: Joi.string()
-    .pattern(emailRegex)
-    .required(),
+  email: Joi.string().pattern(emailRegex).required(),
   password: Joi.string()
     .pattern(passwordRegex)
     .min(6)
@@ -78,7 +77,7 @@ const joiLoginSchema = Joi.object({
       'string.max': `{#label} should have a maximum length of {#limit}`,
       'string.pattern.base': `{#label} may contain alphabet and symbols [_-]`,
       'string.empty': `{#label} is not allowed to be empty`,
-      'any.required': `{#label} is a required field`
+      'any.required': `{#label} is a required field`,
     }),
 });
 
@@ -97,10 +96,14 @@ const joiTrainingSchema = Joi.object({
     .messages(dateMessage),
 });
 
+const j2sRegisterSchema = j2s(joiRegisterSchema).swagger;
+const j2sLoginSchema = j2s(joiLoginSchema).swagger;
+const j2sTrainingSchema = j2s(joiTrainingSchema).swagger;
+
 const schemas = {
-  joiRegisterSchema,
-  joiLoginSchema,
-  joiTrainingSchema,
+  j2sRegisterSchema,
+  j2sLoginSchema,
+  j2sTrainingSchema,
 };
 
 const User = model('user', userSchema);

@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
+const j2s = require('joi-to-swagger');
 const { handleSchemaValidationError } = require('../helpers');
 
 const statisticsSchema = new Schema(
@@ -36,8 +37,10 @@ const addStatistics = Joi.object({
   numberOfPagesRead: Joi.number().required(),
 });
 
+const j2sAddStatistics = j2s(addStatistics).swagger;
+
 const statisticsJoiSchema = {
-  addStatistics,
+  j2sAddStatistics,
 };
 
 const Statistics = model('statistics', statisticsSchema);
