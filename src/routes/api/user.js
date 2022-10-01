@@ -9,6 +9,11 @@ router.get('/current', authenticate, controllerWrapper(ctrl.currentUser));
 
 router.get('/training', authenticate, controllerWrapper(ctrl.currentTraining));
 
-router.patch('/training', authenticate, validationBody(schemas.joiTrainingSchema), controllerWrapper(ctrl.addTraining));
+router.patch(
+  '/training',
+  authenticate,
+  validationBody(schemas.j2sTrainingSchema),
+  controllerWrapper(ctrl.addTraining)
+);
 
 module.exports = router;

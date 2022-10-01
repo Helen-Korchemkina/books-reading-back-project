@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
+const j2s = require('joi-to-swagger');
 const { handleSchemaValidationError } = require('../helpers');
 
 const bookSchema = Schema(
@@ -64,10 +65,14 @@ const updateStatus = Joi.object({
   status: Joi.string().required(),
 });
 
+const j2saddSchema = j2s(addSchema).swagger;
+const j2sreviewSchema = j2s(reviewSchema).swagger;
+const j2supdateStatus = j2s(updateStatus).swagger;
+
 const bookJoiSchemas = {
-  addSchema,
-  reviewSchema,
-  updateStatus,
+  j2saddSchema,
+  j2sreviewSchema,
+  j2supdateStatus,
 };
 
 const Book = model('book', bookSchema);

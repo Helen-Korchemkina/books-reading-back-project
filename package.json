@@ -33,6 +33,7 @@
     "http-errors": "^2.0.0",
     "jimp": "^0.16.1",
     "joi": "^17.6.0",
+    "joi-to-swagger": "^6.1.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.2",
     "morgan": "1.10.0",
