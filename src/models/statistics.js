@@ -31,9 +31,9 @@ const statisticsSchema = new Schema(
 statisticsSchema.post('save', handleSchemaValidationError);
 
 const addStatistics = Joi.object({
-  readDate: Joi.string().required(),
-  readTime: Joi.string().required(),
-  numberOfPagesRead: Joi.number().required(),
+  readDate: Joi.string().allow(null).required(),
+  readTime: Joi.string().allow(null).required(),
+  numberOfPagesRead: Joi.number().allow(null).required(),
 });
 
 const statisticsJoiSchema = {
