@@ -13,7 +13,7 @@ const bookSchema = Schema(
       requiered: [true, 'author title is required'],
     },
     releaseDate: {
-      type: String,
+      type: Number,
       require: true,
     },
     countOfPages: {
@@ -40,7 +40,7 @@ const bookSchema = Schema(
     resume: {
       type: String,
       requiered: false,
-      default: null,
+      default: '',
     },
   },
   { versionKey: false, timestamps: true }
@@ -51,7 +51,7 @@ bookSchema.post('save', handleSchemaValidationError);
 const addSchema = Joi.object({
   title: Joi.string().required(),
   author: Joi.string().required(),
-  releaseDate: Joi.string().required(),
+  releaseDate: Joi.number().required(),
   countOfPages: Joi.number().required(),
 });
 
