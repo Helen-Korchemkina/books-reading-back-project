@@ -1,24 +1,17 @@
 const { Schema, model } = require('mongoose');
 const { handleSchemaValidationError } = require('../helpers');
 
-const twoHours = (60 * 60) * 2;
-
 const sessionSchema = new Schema({
-    expireAt: {
-        type: Date,
-        default: new Date,
-        expired: twoHours,
-    },
     token: {
         type: String,
         default: '',
     },
-}, { versionKey: false, timestamps: true });
-
-sessionSchema.index(
-    { createdAt: 1 },
-    {expireAfterSeconds: twoHours}
-);
+    expiresAt: {
+        type: Date,
+        expires: '2h',
+        default: Date.now,
+    }
+}, { versionKey: false });
 
 sessionSchema.post('save', handleSchemaValidationError);
 
