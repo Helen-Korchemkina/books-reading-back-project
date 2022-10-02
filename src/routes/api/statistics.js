@@ -16,7 +16,7 @@ routerStatistics.get(
 
 routerStatistics.patch(
   '/:userId',
-  validationBody(statisticsJoiSchema.j2sAddStatistics),
+  validationBody(statisticsJoiSchema.addStatistics),
   controllerWrapper(statisticsController.updateStatistics)
 );
 
