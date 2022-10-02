@@ -12,7 +12,7 @@ router.get('/training', authenticate, controllerWrapper(ctrl.currentTraining));
 router.patch(
   '/training',
   authenticate,
-  validationBody(schemas.j2sTrainingSchema),
+  validationBody(schemas.joiTrainingSchema),
   controllerWrapper(ctrl.addTraining)
 );
 

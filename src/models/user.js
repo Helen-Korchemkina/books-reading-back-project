@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
-const j2s = require('joi-to-swagger');
+
 const {
   handleSchemaValidationError,
   dateTrainingValidation,
@@ -96,14 +96,11 @@ const joiTrainingSchema = Joi.object({
     .messages(dateMessage),
 });
 
-const j2sRegisterSchema = j2s(joiRegisterSchema).swagger;
-const j2sLoginSchema = j2s(joiLoginSchema).swagger;
-const j2sTrainingSchema = j2s(joiTrainingSchema).swagger;
 
 const schemas = {
-  j2sRegisterSchema,
-  j2sLoginSchema,
-  j2sTrainingSchema,
+  joiRegisterSchema,
+  joiLoginSchema,
+  joiTrainingSchema,
 };
 
 const User = model('user', userSchema);

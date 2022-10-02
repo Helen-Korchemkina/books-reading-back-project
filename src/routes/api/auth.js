@@ -7,13 +7,13 @@ const { schemas } = require('../../models/user');
 
 router.post(
   '/register',
-  validationBody(schemas.j2sRegisterSchema),
+  validationBody(schemas.joiRegisterSchema),
   controllerWrapper(ctrl.register)
 );
 
 router.post(
   '/login',
-  validationBody(schemas.j2sLoginSchema),
+  validationBody(schemas.joiLoginSchema),
   controllerWrapper(ctrl.login)
 );
 
