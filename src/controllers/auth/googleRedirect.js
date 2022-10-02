@@ -1,15 +1,14 @@
 const queryString = require('query-string');
 const axios = require('axios');
-const jwt = require('jsonwebtoken');
 const { User } = require('../../models/user');
 const statisticsService = require('../../service/statistics');
+const { createToken } = require('../../service/user');
 
 const {
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
   BASE_URL,
   FRONTEND_URL,
-  SECRET_KEY,
 } = process.env;
 
 const googleRedirect = async (req, res) => {
@@ -48,12 +47,7 @@ const googleRedirect = async (req, res) => {
     await statisticsService.addStatistics(user._id);
   }
 
-  const payload = {
-    id: user._id,
-  };
-
-  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
-  await User.findByIdAndUpdate(user._id, { token });
+  const { token } = createToken(user._id);
 
   return res.redirect(
     // eslint-disable-next-line camelcase
