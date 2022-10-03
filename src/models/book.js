@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const Joi = require('joi');
 const { handleSchemaValidationError } = require('../helpers');
 
-const bookSchema = Schema(
+const bookSchema = new Schema(
   {
     title: {
       type: String,
