@@ -1,6 +1,6 @@
 const queryString = require('query-string');
 const axios = require('axios');
-const { User } = require('../../models/user');
+const { User } = require('../../models');
 const statisticsService = require('../../service/statistics');
 const { createToken } = require('../../service/user');
 

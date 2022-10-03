@@ -3,7 +3,7 @@ const router = express.Router();
 const ctrl = require('../../controllers/user');
 const { controllerWrapper } = require('../../helpers');
 const { authenticate, validationBody } = require('../../middlewares');
-const { schemas } = require('../../models/user');
+const { schemas } = require('../../models');
 
 router.get('/current', authenticate, controllerWrapper(ctrl.currentUser));
 

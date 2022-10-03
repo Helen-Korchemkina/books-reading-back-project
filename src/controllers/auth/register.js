@@ -1,5 +1,5 @@
 const { RequestError } = require('../../helpers');
-const { User } = require('../../models/user');
+const { User } = require('../../models');
 const statisticsService = require('../../service/statistics');
 const bcrypt = require('bcryptjs');
 const { createToken } = require('../../service/user');

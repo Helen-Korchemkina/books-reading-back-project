@@ -1,5 +1,5 @@
 const { getTrainingTime, RequestError } = require("../../helpers");
-const { User } = require("../../models/user");
+const { User } = require("../../models");
 
 const addTraining = async (req, res) => {
     const { _id } = req.user;
