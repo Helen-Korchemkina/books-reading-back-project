@@ -1,7 +1,7 @@
 const bookService = require('../../service/book');
 const { RequestError } = require('../../helpers');
 
-const add = async (req, res) => {
+const addBook = async (req, res) => {
   const { _id } = req.user;
   const { countOfPages } = req.body;
   if (countOfPages <= 0)
@@ -21,4 +21,4 @@ const add = async (req, res) => {
   });
 };
 
-module.exports = add;
+module.exports = addBook;

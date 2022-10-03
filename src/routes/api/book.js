@@ -2,7 +2,11 @@ const express = require('express');
 
 const bookControllers = require('../../controllers/book');
 const { controllerWrapper } = require('../../helpers');
-const { validationBody, authenticate } = require('../../middlewares');
+const {
+  validationBody,
+  authenticate,
+  isValidId,
+} = require('../../middlewares');
 const { bookJoiSchemas } = require('../../models');
 const routerBook = express.Router();
 
@@ -17,23 +21,23 @@ routerBook.post(
 );
 
 routerBook.patch(
-  '/:bookId',
-  validationBody(bookJoiSchemas.addSchema),
-  controllerWrapper(bookControllers.updateBook)
-);
-
-routerBook.patch(
   '/:bookId/review',
+  isValidId,
   validationBody(bookJoiSchemas.reviewSchema),
   controllerWrapper(bookControllers.addReviews)
 );
 
 routerBook.patch(
   '/:bookId/status',
+  isValidId,
   validationBody(bookJoiSchemas.updateStatus),
-  controllerWrapper(bookControllers.updateBook)
+  controllerWrapper(bookControllers.updateStatus)
 );
 
-routerBook.delete('/:bookId', controllerWrapper(bookControllers.deleteBook));
+routerBook.delete(
+  '/:bookId',
+  isValidId,
+  controllerWrapper(bookControllers.deleteBook)
+);
 
 module.exports = routerBook;
