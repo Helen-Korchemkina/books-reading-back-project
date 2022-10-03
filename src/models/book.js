@@ -56,12 +56,14 @@ const addSchema = Joi.object({
 });
 
 const reviewSchema = Joi.object({
-  rating: Joi.number().required(),
+  rating: Joi.number().valid(0, 1, 2, 3, 4, 5).required(),
   resume: Joi.string(),
 });
 
 const updateStatus = Joi.object({
-  status: Joi.string().required(),
+  status: Joi.string()
+    .valid('Going to read', 'Already read', 'Reading now')
+    .required(),
 });
 
 const bookJoiSchemas = {

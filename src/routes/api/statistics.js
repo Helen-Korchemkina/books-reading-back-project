@@ -2,7 +2,11 @@ const express = require('express');
 
 const statisticsController = require('../../controllers/statistics');
 const { controllerWrapper } = require('../../helpers');
-const { validationBody, authenticate } = require('../../middlewares');
+const {
+  validationBody,
+  authenticate,
+  isValidId,
+} = require('../../middlewares');
 const { statisticsJoiSchema } = require('../../models');
 
 const routerStatistics = express.Router();
@@ -16,6 +20,7 @@ routerStatistics.get(
 
 routerStatistics.patch(
   '/:userId',
+  isValidId,
   validationBody(statisticsJoiSchema.addStatistics),
   controllerWrapper(statisticsController.updateStatistics)
 );
