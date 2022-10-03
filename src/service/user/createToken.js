@@ -5,7 +5,7 @@ const { SECRET_KEY } = process.env;
 const createToken = async (id) => {
     const payload = { id };
 
-    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
+    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '100d' });
     const data = await User.findByIdAndUpdate(
         id,
         { token },
