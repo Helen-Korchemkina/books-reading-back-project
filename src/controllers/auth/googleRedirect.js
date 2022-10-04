@@ -47,7 +47,7 @@ const googleRedirect = async (req, res) => {
     await statisticsService.addStatistics(user._id);
   }
 
-  const token = createToken(user._id);
+  const token = await createToken(user._id);
 
   return res.redirect(
     // eslint-disable-next-line camelcase
