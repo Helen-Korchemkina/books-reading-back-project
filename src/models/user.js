@@ -15,6 +15,13 @@ const dateMessage = {
   'string.empty': `{#label} is not allowed to be empty`,
   'any.required': `{#label} is a required field`,
 };
+const passwordMessage = {
+  'string.min': `{#label} should have a minimum length of {#limit}`,
+  'string.max': `{#label} should have a maximum length of {#limit}`,
+  'string.pattern.base': `{#label} may contain alphabet and symbols [_-]`,
+  'string.empty': `{#label} is not allowed to be empty`,
+  'any.required': `{#label} is a required field`,
+};
 
 const userSchema = new Schema(
   {
@@ -30,10 +37,6 @@ const userSchema = new Schema(
       unique: true,
     },
     password: {
-      type: String,
-      default: '',
-    },
-    token: {
       type: String,
       default: '',
     },
@@ -55,13 +58,7 @@ const joiRegisterSchema = Joi.object({
     .min(6)
     .max(35)
     .required()
-    .messages({
-      'string.min': `{#label} should have a minimum length of {#limit}`,
-      'string.max': `{#label} should have a maximum length of {#limit}`,
-      'string.pattern.base': `{#label} may contain alphabet and symbols [_-]`,
-      'string.empty': `{#label} is not allowed to be empty`,
-      'any.required': `{#label} is a required field`,
-    }),
+    .messages(passwordMessage),
   confirm_password: Joi.string().required().valid(Joi.ref('password')),
 });
 
@@ -72,13 +69,7 @@ const joiLoginSchema = Joi.object({
     .min(6)
     .max(35)
     .required()
-    .messages({
-      'string.min': `{#label} should have a minimum length of {#limit}`,
-      'string.max': `{#label} should have a maximum length of {#limit}`,
-      'string.pattern.base': `{#label} may contain alphabet and symbols [_-]`,
-      'string.empty': `{#label} is not allowed to be empty`,
-      'any.required': `{#label} is a required field`,
-    }),
+    .messages(passwordMessage),
 });
 
 const joiTrainingSchema = Joi.object({
