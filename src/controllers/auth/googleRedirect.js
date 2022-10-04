@@ -51,7 +51,7 @@ const googleRedirect = async (req, res) => {
 
   return res.redirect(
     // eslint-disable-next-line camelcase
-    `${FRONTEND_URL}/answer-google?token=${token}&name=${given_name}&email=${email}`
+    `${FRONTEND_URL}/answer-google?token=${token}`
   );
 };
 
