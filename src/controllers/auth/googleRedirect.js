@@ -1,15 +1,12 @@
 const queryString = require('query-string');
 const axios = require('axios');
+require('dotenv').config();
 const { User } = require('../../models');
 const statisticsService = require('../../service/statistics');
 const { createToken } = require('../../service/user');
 
-const {
-  GOOGLE_CLIENT_ID,
-  GOOGLE_CLIENT_SECRET,
-  BASE_URL,
-  FRONTEND_URL,
-} = process.env;
+const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, BASE_URL, FRONTEND_URL } =
+  process.env;
 
 const googleRedirect = async (req, res) => {
   const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
