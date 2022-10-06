@@ -2,11 +2,11 @@ const statisticsService = require('../../service/statistics');
 const { RequestError } = require('../../helpers');
 
 const updateStatistics = async (req, res) => {
-  const { userId } = req.params;
+  const { _id } = req.user;
   const { readDate, readTime, numberOfPagesRead } = req.body;
   let body = {};
 
-  const getStatistics = await statisticsService.getStatistics(userId);
+  const getStatistics = await statisticsService.getStatistics(_id);
   if (!getStatistics) throw RequestError(404, 'Bad request');
 
   if (readDate === null || readTime === null || numberOfPagesRead === null) {
