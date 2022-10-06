@@ -1,5 +1,4 @@
 const queryString = require('query-string');
-require('dotenv').config();
 
 const { GOOGLE_CLIENT_ID, BASE_URL } = process.env;
 

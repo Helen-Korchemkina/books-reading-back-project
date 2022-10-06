@@ -1,6 +1,5 @@
 const queryString = require('query-string');
 const axios = require('axios');
-require('dotenv').config();
 const { User } = require('../../models');
 const statisticsService = require('../../service/statistics');
 const { createToken } = require('../../service/user');
