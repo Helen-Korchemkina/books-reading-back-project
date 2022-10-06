@@ -7,7 +7,7 @@ const getStatistics = async (req, res) => {
   const statistics = await statisticsService.getStatistics(userId);
   if (!statistics) throw RequestError(404, 'Bad request');
 
-  res.status(200).json({ data: { statistics } });
+  res.status(200).json({ data: { statistics: [statistics] } });
 };
 
 module.exports = getStatistics;
