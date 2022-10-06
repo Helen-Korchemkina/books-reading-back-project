@@ -1,10 +1,8 @@
-const { Session, User } = require('../../models');
+const { Session } = require('../../models');
 
 const logout = async (req, res) => {
-  const { _id, token } = req.user;
+  const { token } = req.user;
   await Session.create({token});
-  await User.findByIdAndUpdate(_id, { token: '' });
-  
   res.json('logout success');
 };
 

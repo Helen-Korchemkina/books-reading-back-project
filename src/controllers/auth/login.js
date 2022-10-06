@@ -11,7 +11,12 @@ const login = async (req, res) => {
   const comparePassword = await bcrypt.compare(password, user.password);
   if (!comparePassword) { throw RequestError(401, 'Email or password is wrong') };
 
-  const { token, data } = await createToken(user._id);
+  const token = await createToken(user._id);
+  const data = {
+    _id: user._id,
+    name: user.name,
+    email: user.email
+  };
 
   res.json({
     token,

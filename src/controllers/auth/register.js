@@ -13,7 +13,12 @@ const register = async (req, res) => {
   const result = await User.create({ name, email, password: hashPassword });
   const statistics = await statisticsService.addStatistics(result._id);
   const createdUser = await User.findOne({ email });
-  const { token, data } = await createToken(createdUser._id);
+  const token = await createToken(createdUser._id);
+  const data = {
+    _id: createdUser._id,
+    name: createdUser.name,
+    email: createdUser.email
+  };
 
   res.status(201).json({
     token,
