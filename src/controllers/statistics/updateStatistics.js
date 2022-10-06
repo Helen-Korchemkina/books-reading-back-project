@@ -16,10 +16,10 @@ const updateStatistics = async (req, res) => {
     };
   } else {
     body = {
-      readDate: [...getStatistics.readDate, readDate],
+      readDate: [readDate, ...getStatistics.readDate],
       numberOfPagesRead: [
-        ...getStatistics.numberOfPagesRead,
         numberOfPagesRead,
+        ...getStatistics.numberOfPagesRead,
       ],
     };
   }
