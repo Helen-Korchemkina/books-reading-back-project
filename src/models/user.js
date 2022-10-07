@@ -6,7 +6,6 @@ const {
   dateTrainingValidation,
 } = require('../helpers');
 
-const nameRegex = /^[a-zA-Z]+$/;
 const emailRegex = /^[\w.]+@[\w.]+.[\w.]+$/;
 const passwordRegex = /^[a-z0-9A-Z_-]+$/;
 const dateMessage = {
@@ -27,7 +26,6 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      match: [nameRegex, 'Name must contain only letters'],
       required: [true, 'Name is required'],
     },
     email: {
@@ -51,7 +49,7 @@ const userSchema = new Schema(
 userSchema.post('save', handleSchemaValidationError);
 
 const joiRegisterSchema = Joi.object({
-  name: Joi.string().pattern(nameRegex).required(),
+  name: Joi.string().min(2).max(30).required(),
   email: Joi.string().pattern(emailRegex).required(),
   password: Joi.string()
     .pattern(passwordRegex)
