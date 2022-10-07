@@ -6,7 +6,7 @@ const {
   dateTrainingValidation,
 } = require('../helpers');
 
-const emailRegex = /^[\w.]+@[\w.]+.[\w.]+$/;
+const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]{2,}(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 const passwordRegex = /^[a-z0-9A-Z_-]+$/;
 const dateMessage = {
   'string.min': `{#label} should have a minimum length of {#limit}`,
