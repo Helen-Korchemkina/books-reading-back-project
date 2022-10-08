@@ -1,3 +1,7 @@
 const createToken = require("./createToken");
+const registerEmail = require("./registerEmail");
 
-module.exports = { createToken };
+module.exports = {
+    createToken,
+    registerEmail,
+};
