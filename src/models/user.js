@@ -86,7 +86,7 @@ const joiTrainingSchema = Joi.object({
 });
 
 
-const schemas = {
+const userSchemas = {
   joiRegisterSchema,
   joiLoginSchema,
   joiTrainingSchema,
@@ -96,5 +96,5 @@ const User = model('user', userSchema);
 
 module.exports = {
   User,
-  schemas,
+  userSchemas,
 };
