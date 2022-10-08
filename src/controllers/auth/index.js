@@ -1,3 +1,5 @@
+const changePassword = require('./changePassword');
+const forgotPassword = require('./forgotPassword');
 const googleAuth = require('./googleAuth');
 const googleRedirect = require('./googleRedirect');
 const login = require('./login');
@@ -10,4 +12,6 @@ module.exports = {
   logout,
   googleAuth,
   googleRedirect,
+  forgotPassword,
+  changePassword,
 };
