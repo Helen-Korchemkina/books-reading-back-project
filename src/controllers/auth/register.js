@@ -1,8 +1,8 @@
-const { RequestError } = require('../../helpers');
+const { RequestError, sendEmail } = require('../../helpers');
 const { User } = require('../../models');
 const statisticsService = require('../../service/statistics');
 const bcrypt = require('bcryptjs');
-const { createToken } = require('../../service/user');
+const { createToken, registerEmail } = require('../../service/user');
 
 const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -11,6 +11,8 @@ const register = async (req, res) => {
 
   const hashPassword = await bcrypt.hash(password, 10);
   const result = await User.create({ name, email, password: hashPassword });
+  const mail = await registerEmail({name, email});
+  await sendEmail(mail);
   const statistics = await statisticsService.addStatistics(result._id);
   const createdUser = await User.findOne({ email });
   const token = await createToken(createdUser._id);

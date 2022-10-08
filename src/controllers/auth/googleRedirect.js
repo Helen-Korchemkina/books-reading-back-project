@@ -2,7 +2,8 @@ const queryString = require('query-string');
 const axios = require('axios');
 const { User } = require('../../models');
 const statisticsService = require('../../service/statistics');
-const { createToken } = require('../../service/user');
+const { createToken, registerEmail } = require('../../service/user');
+const { sendEmail } = require('../../helpers');
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, BASE_URL, FRONTEND_URL } =
   process.env;
@@ -41,6 +42,8 @@ const googleRedirect = async (req, res) => {
     await User.create({ name: given_name, email });
     user = await User.findOne({ email });
     await statisticsService.addStatistics(user._id);
+    const mail = await registerEmail({ name: user.name, email: user.email });
+    await sendEmail(mail);
   }
 
   const token = await createToken(user._id);
