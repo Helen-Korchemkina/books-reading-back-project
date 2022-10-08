@@ -42,6 +42,10 @@ const bookSchema = new Schema(
       requiered: false,
       default: '',
     },
+    isReadBook: {
+      type: Boolean,
+      default: false,
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -53,6 +57,7 @@ const addSchema = Joi.object({
   author: Joi.string().required(),
   releaseDate: Joi.number().required(),
   countOfPages: Joi.number().required(),
+  isReadBook: Joi.boolean(),
 });
 
 const reviewSchema = Joi.object({
