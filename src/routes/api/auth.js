@@ -3,17 +3,17 @@ const router = express.Router();
 const ctrl = require('../../controllers/auth');
 const { controllerWrapper } = require('../../helpers');
 const { authenticate, validationBody } = require('../../middlewares');
-const { schemas } = require('../../models');
+const { userSchemas } = require('../../models');
 
 router.post(
   '/register',
-  validationBody(schemas.joiRegisterSchema),
+  validationBody(userSchemas.joiRegisterSchema),
   controllerWrapper(ctrl.register)
 );
 
 router.post(
   '/login',
-  validationBody(schemas.joiLoginSchema),
+  validationBody(userSchemas.joiLoginSchema),
   controllerWrapper(ctrl.login)
 );
 
