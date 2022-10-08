@@ -4,6 +4,7 @@ const controllerWrapper = require('./controllerWrapper');
 const getTrainingTime = require('./getTrainingTime');
 const dateTrainingValidation = require('./dateTrainingValidation');
 const idComparison = require('./idСomparison');
+const sendEmail = require('./sendEmail');
 
 module.exports = {
   RequestError,
@@ -12,4 +13,5 @@ module.exports = {
   getTrainingTime,
   dateTrainingValidation,
   idComparison,
+  sendEmail,
 };

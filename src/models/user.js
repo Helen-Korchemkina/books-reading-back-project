@@ -85,11 +85,29 @@ const joiTrainingSchema = Joi.object({
     .messages(dateMessage),
 });
 
+const joiForgotPasswordSchema = Joi.object({
+  email: Joi.string().pattern(emailRegex).required(),
+});
+
+const joiChangePasswordSchema = Joi.object({
+  // id: Joi.string().required(),
+  otp: Joi.string().min(25).max(25).required(),
+  password: Joi.string()
+    .pattern(passwordRegex)
+    .min(6)
+    .max(35)
+    .required()
+    .messages(passwordMessage),
+  confirm_password: Joi.string().required().valid(Joi.ref('password')),
+});
+
 
 const userSchemas = {
   joiRegisterSchema,
   joiLoginSchema,
   joiTrainingSchema,
+  joiForgotPasswordSchema,
+  joiChangePasswordSchema,
 };
 
 const User = model('user', userSchema);
