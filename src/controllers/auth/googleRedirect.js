@@ -42,7 +42,8 @@ const googleRedirect = async (req, res) => {
     await User.create({ name: given_name, email });
     user = await User.findOne({ email });
     await statisticsService.addStatistics(user._id);
-    await sendEmail(registerEmail({ name : user.name , email: user.email }));
+    const mail = await registerEmail({ name: user.name, email: user.email });
+    await sendEmail(mail);
   }
 
   const token = await createToken(user._id);
