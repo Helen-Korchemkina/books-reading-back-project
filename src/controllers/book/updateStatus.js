@@ -4,9 +4,8 @@ const { RequestError, idComparison } = require('../../helpers');
 const updateStatus = async (req, res) => {
   const { _id } = req.user;
   const { bookId } = req.params;
-  const { status } = req.body;
 
-  const book = await bookService.updateBook(bookId, { status });
+  const book = await bookService.updateBook(bookId, req.body);
 
   if (!book) throw RequestError(404, 'Bad request');
 
