@@ -2,12 +2,11 @@ const { FRONTEND_URL } = process.env;
 // const fs = require('fs').promises;
 // const path = require('path');
 // const imagePath = path.join(__dirname, './images/email.png');
-// const Jimp = require('jimp');
 
 const changePasswordEmail = async (token) => {
-    // const image = await fs.readFile(imagePath);
-    // const foto = await Jimp.read(image)
-    // console.log(foto);
+    // const imageBuffer = await fs.readFile(imagePath);
+    // const imageBase64 = await imageBuffer.toString('base64');
+    // console.log(imageBase64);
 
     const html = `<!DOCTYPE html>
         <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
