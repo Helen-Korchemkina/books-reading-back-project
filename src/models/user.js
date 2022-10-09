@@ -73,12 +73,12 @@ const joiLoginSchema = Joi.object({
 const joiTrainingSchema = Joi.object({
   date_start: Joi.string()
     .pattern(/^[0-9]+$/)
-    .custom(dateTrainingValidation)
+    // .custom(dateTrainingValidation)
     .required()
     .messages(dateMessage),
   date_finish: Joi.string()
     .pattern(/^[0-9]+$/)
-    .custom(dateTrainingValidation)
+    // .custom(dateTrainingValidation)
     .required()
     .messages(dateMessage),
 });
