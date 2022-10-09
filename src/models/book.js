@@ -69,6 +69,7 @@ const updateStatus = Joi.object({
   status: Joi.string()
     .valid('Going to read', 'Already read', 'Reading now')
     .required(),
+  isReadBook: Joi.boolean(),
 });
 
 const bookJoiSchemas = {
