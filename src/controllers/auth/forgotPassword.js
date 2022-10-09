@@ -1,7 +1,8 @@
 const { RequestError, sendEmail } = require("../../helpers");
 const { User, OTP } = require("../../models");
 const jwt = require('jsonwebtoken');
-const { FRONTEND_URL, SECRET_KEY } = process.env;
+const { changePasswordEmail } = require("../../email");
+const { SECRET_KEY } = process.env;
 
 const forgotPassword = async (req, res) => {
     const { email } = req.body;
@@ -14,7 +15,7 @@ const forgotPassword = async (req, res) => {
     const mail = {
         to: email,
         subject: "Заміна паролю",
-        html: `<a href="${FRONTEND_URL}/new-password?token=${token}" target="_blank" > Натисніть для зміни пароля </a>`
+        html: await changePasswordEmail(token)
     };
 
     await OTP.create({ token });
