@@ -6,14 +6,24 @@ const addTraining = async (req, res) => {
 
     // eslint-disable-next-line camelcase
     const { date_start, date_finish } = req.body;
-    
-    // eslint-disable-next-line camelcase
-    if (date_start > date_finish) {
+    console.log(date_start);
+    console.log(date_finish);
+
+    let start = 0;
+    let finish = 0;
+
+    if (Number(date_start) === 0 && Number(date_finish) === 0) {
+        start = 0;
+        finish = 0;
+    } else {
         // eslint-disable-next-line camelcase
-        throw RequestError(400, `"date_start" must be less than "date_finish"`);
+        if (date_start > date_finish) {
+            // eslint-disable-next-line camelcase
+            throw RequestError(400, `"date_start" must be less than "date_finish"`);
+        }
+        start = getTrainingTime(Number(date_start));
+        finish = getTrainingTime(Number(date_finish));
     }
-    const start = getTrainingTime(Number(date_start));
-    const finish = getTrainingTime(Number(date_finish));
 
     const training = {
         start,
