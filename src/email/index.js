@@ -1,7 +1,7 @@
 const changePasswordEmail = require("./changePasswordEmail");
-const registerEmail = require("./registerEmail");
+const userRegisterEmail = require("./userRegisterEmail");
 
 module.exports= {
-    registerEmail,
+    userRegisterEmail,
     changePasswordEmail,
 };
