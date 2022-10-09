@@ -2,11 +2,7 @@ const { Schema, model } = require('mongoose');
 const { handleSchemaValidationError } = require('../helpers');
 
 const oneTimePasswordSchema = new Schema({
-    id: {
-        type: String,
-        default: '',
-    },
-    otp: {
+    token: {
         type: String,
         default: '',
     },
