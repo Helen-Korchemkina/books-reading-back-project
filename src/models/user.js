@@ -90,8 +90,7 @@ const joiForgotPasswordSchema = Joi.object({
 });
 
 const joiChangePasswordSchema = Joi.object({
-  // id: Joi.string().required(),
-  otp: Joi.string().min(25).max(25).required(),
+  token: Joi.string().required(),
   password: Joi.string()
     .pattern(passwordRegex)
     .min(6)

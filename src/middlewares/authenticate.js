@@ -1,6 +1,6 @@
 const { RequestError } = require('../helpers');
 const jwt = require('jsonwebtoken');
-const { User, Session } = require('../models');
+const { User, Session, OTP } = require('../models');
 const { SECRET_KEY } = process.env;
 
 const notAuthorization = RequestError(401, 'Not authorized');
@@ -11,7 +11,8 @@ const authenticate = async (req, _, next) => {
   if (bearer !== 'Bearer') { next(notAuthorization) };
 
   const blackList = await Session.findOne({ token });
-  if (blackList) { next(notAuthorization) };
+  const changeToken = await OTP.findOne({ token });
+  if (blackList || changeToken) { next(notAuthorization) };
 
   try {
     const { id } = jwt.verify(token, SECRET_KEY);
