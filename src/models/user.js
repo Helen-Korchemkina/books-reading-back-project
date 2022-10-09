@@ -72,13 +72,11 @@ const joiLoginSchema = Joi.object({
 
 const joiTrainingSchema = Joi.object({
   date_start: Joi.string()
-    .min(13)
     .pattern(/^[0-9]+$/)
     .custom(dateTrainingValidation)
     .required()
     .messages(dateMessage),
   date_finish: Joi.string()
-    .min(13)
     .pattern(/^[0-9]+$/)
     .custom(dateTrainingValidation)
     .required()
