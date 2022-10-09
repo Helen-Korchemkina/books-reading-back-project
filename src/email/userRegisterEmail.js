@@ -1,15 +1,7 @@
 const { FRONTEND_URL } = process.env;
-// const fs = require('fs').promises;
-// const path = require('path');
-// const imagePath = path.join(__dirname, './images/email.png');
-// const Jimp = require('jimp');
 
-const changePasswordEmail = async (token) => {
-    // const image = await fs.readFile(imagePath);
-    // const foto = await Jimp.read(image)
-    // console.log(foto);
-
-    const html = `<!DOCTYPE html>
+const userRegisterEmail = async (name) => {
+    const html=`<!DOCTYPE html>
         <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
         <head>
             <meta charset="utf-8"> <!-- utf-8 works for most cases -->
@@ -125,25 +117,13 @@ const changePasswordEmail = async (token) => {
                 }
                 }
             </style>
+
             <style>
                 .bg_white {
                 background: #ffffff;
                 }
                 .email-section {
                 padding: 2.5em;
-                }
-
-                /*BUTTON*/
-                .btn {
-                margin-top: 15px;
-                padding: 10px 15px;
-                display: inline-block;
-                }
-
-                .btn.btn-primary {
-                font-family: 'Montserrat', sans-serif;
-                background: #ff6b08;
-                color: #ffffff;
                 }
 
                 h1,
@@ -199,9 +179,9 @@ const changePasswordEmail = async (token) => {
                 }
 
                 .hero .text h3 {
-                text-align: start;
+                text-indent: 15px;
                 margin-bottom: 7px;
-                font-size: 18px;
+                font-size: 22px;
                 font-weight: 300;
                 line-height: 1.2;
                 }
@@ -235,7 +215,7 @@ const changePasswordEmail = async (token) => {
                 </tr>
                 <tr>
                 <td valign="middle" class="hero bg_white" style="padding: 3em 0 2em 0;">
-                    <img src="https://github.com/mrkuzyk/books-reading-email-template/blob/main/images/email.png" alt="mail-image" style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;">
+                    <img src="images/email.png" alt="mail-image" style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;">
                 </td>
                 </tr>
                         <tr>
@@ -244,10 +224,8 @@ const changePasswordEmail = async (token) => {
                         <tr>
                             <td>
                                 <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                    <h2>Your password change request</h2>
-                                    <h3>If you submitted a password change request, click the button to continue.</h3>
-                                    <h3>If you have not requested a password change, please ignore this mail.</h3>
-                                    <p><a href="${FRONTEND_URL}/new-password?token=${token}" class="btn btn-primary">Change password</a></p>
+                                    <h2>Welcome!</h2>
+                                    <h3>${name}, we are very happy to welcome you to our application. Enjoy your reading.</h3>
                                 </div>
                             </td>
                         </tr>
@@ -258,9 +236,8 @@ const changePasswordEmail = async (token) => {
             </div>
         </center>
         </body>
-    </html>`;
-
+    </html>`
     return html;
 };
 
-module.exports = changePasswordEmail;
+module.exports = userRegisterEmail;

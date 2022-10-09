@@ -1,8 +1,10 @@
-const registerEmail = async ({name, email}) => {
+const { userRegisterEmail } = require("../../email");
+
+const registerEmail = async (name, email) => {
     const mail = {
         to: email,
-        subject: "Успішна реєстрація",
-        html: `<p> Привіт, ${name}. Ви успішно зареєструвалися в додатку </p>`
+        subject: "Success Registration",
+        html: await userRegisterEmail(name)
     };
     return mail;
 };

@@ -11,7 +11,7 @@ const register = async (req, res) => {
 
   const hashPassword = await bcrypt.hash(password, 10);
   const result = await User.create({ name, email, password: hashPassword });
-  const mail = await registerEmail({name, email});
+  const mail = await registerEmail(name, email);
   await sendEmail(mail);
   const statistics = await statisticsService.addStatistics(result._id);
   const createdUser = await User.findOne({ email });
