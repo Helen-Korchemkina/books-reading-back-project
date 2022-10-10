@@ -3,7 +3,6 @@ const Joi = require('joi');
 
 const {
   handleSchemaValidationError,
-  dateTrainingValidation,
 } = require('../helpers');
 
 const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]{2,}(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;

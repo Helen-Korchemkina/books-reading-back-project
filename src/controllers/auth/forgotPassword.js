@@ -14,7 +14,7 @@ const forgotPassword = async (req, res) => {
 
     const mail = {
         to: email,
-        subject: "Заміна паролю",
+        subject: "Change Password",
         html: await changePasswordEmail(token)
     };
 
