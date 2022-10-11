@@ -46,10 +46,6 @@ const bookSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    isChecked: {
-      type: Boolean,
-      default: false,
-    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -62,7 +58,6 @@ const addSchema = Joi.object({
   releaseDate: Joi.number().required(),
   countOfPages: Joi.number().required(),
   isReadBook: Joi.boolean(),
-  isChecked: Joi.boolean(),
 });
 
 const reviewSchema = Joi.object({
