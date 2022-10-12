@@ -1,12 +1,6 @@
 const { FRONTEND_URL } = process.env;
-// const fs = require('fs').promises;
-// const path = require('path');
-// const imagePath = path.join(__dirname, './images/email.png');
 
 const changePasswordEmail = async (token) => {
-    // const imageBuffer = await fs.readFile(imagePath);
-    // const imageBase64 = await imageBuffer.toString('base64');
-    // console.log(imageBase64);
 
     const html = `<!DOCTYPE html>
         <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -233,9 +227,6 @@ const changePasswordEmail = async (token) => {
                 </td>
                 </tr>
                 <tr>
-                <td valign="middle" class="hero bg_white" style="padding: 3em 0 2em 0;">
-                    <img src="https://github.com/mrkuzyk/books-reading-email-template/blob/main/images/email.png" alt="mail-image" style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;">
-                </td>
                 </tr>
                         <tr>
                 <td valign="middle" class="hero bg_white" style="padding: 2em 0 4em 0;">
