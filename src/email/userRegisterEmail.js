@@ -213,11 +213,6 @@ const userRegisterEmail = async (name) => {
                     </table>
                 </td>
                 </tr>
-                <tr>
-                <td valign="middle" class="hero bg_white" style="padding: 3em 0 2em 0;">
-                    <img src="images/email.png" alt="mail-image" style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;">
-                </td>
-                </tr>
                         <tr>
                 <td valign="middle" class="hero bg_white" style="padding: 2em 0 4em 0;">
                     <table>
